@@ -9,84 +9,196 @@
 
 ## 1: TUJUAN PRAKTIKUM
 
-1. Mahasiswa mampu memahami konsep array 1 dimensi serta cara mendeklarasikan, menginisialisasi, dan mengakses elemennya dalam bahasa pemrograman Java 
-2. Mahasiswa mampu membuat program yang memanfaatkan array 1 dimensi untuk menyimpan dan mengolah data, termasuk menggunakan perulangan for dan foreach.
-3. Mahasiswa mampu menerapkan operasi aritmatika pada elemen array, seperti menghitung total, rata-rata, nilai tertinggi, dan nilai terendah.
-4. Mahasiswa mampu menerapkan algoritma pencarian (searching) dan pengurutan (sorting) sederhana pada array 1 dimensi.
-5. Mahasiswa mampu menerapkan array 1 dimensi untuk menyelesaikan studi kasus yang relevan dengan kehidupan kampus dan sehari-hari.
+1. Mahasiswa mampu Mendeklarasikan, menginstansiasi, dan menginisialisasi array 2 dimensi dalam bahasa Java.
+2. Mahasiswa mampu Mengakses dan mengisi elemen array 2 dimensi menggunakan indeks baris dan kolom.
+3. Mahasiswa mampu Memproses array 2 dimensi dengan nested loop, baik for maupun foreach.
+4. Mahasiswa mampu Membuat array 2 dimensi dengan panjang baris yang berbeda (*jagged array*).
+5. Mahasiswa mampu Menghitung nilai rata-rata per baris dan per kolom pada studi kasus nyata.
 
 ---
 
 ## 2: Praktikum
 
-### 2.1 Percobaan 1: Deklarasi, Inisialisasi, Mengisi, dan Menampilkan Elemen Array
+### 2.1 Percobaan 1: Deklarasi, Inisialisasi, dan Menampilkan Array 2 Dimensi
 
 #### 2.1.1 Kode Program Java
 ```java
-import java.util.Arrays;
-
-public class ArrayBilangan19 {
+public class Bioskop19 {
     public static void main(String[] args) {
-        int[] bil = new int[4];
-        bil[0]=5;
-        bil[1]=13;
-        bil[2]=-7;
-        bil[3]=17;
+        String[][] penonton = new String[4][2];
+        penonton[0][0] = "Amin";
+        penonton[0][1] = "Bena";
+        penonton[1][0] = "Candra";
+        penonton[1][1] = "Dela";
+        penonton[2][0] = "Eka";
+        penonton[2][1] = "Farhan";
+        penonton[3][0] = "Gisel";
+        penonton[3][1] = "Hana";
 
-        for (int i = 0; i < bil.length; i++) {
-            System.out.println("bil[" + i + "] = " + bil[i]);
+        System.out.printf("%s \t %s\n", penonton[0][0], penonton[0][1]);
+        System.out.printf("%s \t %s\n", penonton[1][0], penonton[1][1]);
+        System.out.printf("%s \t %s\n", penonton[2][0], penonton[2][1]);
+        System.out.printf("%s \t %s\n", penonton[3][0], penonton[3][1]);
+
+        // System.out.println(penonton.length);
+        // System.out.println(penonton[0].length);
+        // System.out.println(penonton[1].length);
+        // System.out.println(penonton[2].length);
+        // System.out.println(penonton[3].length);
+
+        // FOR LOOP
+        System.out.println(penonton.length);
+
+        for (int i = 0; i < penonton.length; i++) {
+            System.out.println("Panjang baris ke-" + (i + 1) + ": " + penonton[i].length);
         }
-        for (int nilai : bil) {
-            System.out.println(nilai);
+
+        // FOREACH LOOP
+        System.out.println(penonton.length);
+
+        for (String[] barisPenonton : penonton) {
+            System.out.println("Panjang baris: " + barisPenonton.length);
         }
-        System.out.println(Arrays.toString(bil));
+
+        // FOR LOOP
+        System.out.println("Penonton pada baris ke-3: ");
+
+        for (int i = 0; i < penonton[2].length; i++) {
+            System.out.println(penonton[2][i]);
+        }
+
+        // FOREACH LOOP
+        System.out.println("Penonton pada baris ke-3: ");
+
+        for (String i : penonton[2]) {
+            System.out.println(i);
+        }
+        
+        // Menggunakan String.join()
+        for (int i = 0; i < penonton.length; i++) {
+            System.out.println("Penonton pada baris ke-" + (i + 1) + ": " + String.join(", ", penonton[i]));
+        }
+
+        }
+
     }
-}
 ```
 
 #### 2.1.2 Hasil Running / Screenshot Output
 
-![Output Percobaan 1](<Output Array Bilangan.png>)
+![Output Percobaan 1](<Output.png>)
 
 #### 2.1.3 Jawaban Pertanyaan / Pertanyaan Refleksi
-* **Pertanyaan 1:** Jika isi masing-masing elemen array bil diubah dengan angka 5.0, 12867, 7.5, 2000000, apa yang terjadi? Mengapa bisa demikian?
-  * **Jawab:** Jika diisi 5.0, 12867, 7.5, 2000000: Program akan gagal di-compile (compile error). Array bil bertipe int (bilangan bulat), sedangkan 5.0 dan 7.5 adalah bilangan desimal (double), serta 2000000 atau 12867 jika melebihi batas tipe data yang sesuai akan memicu error tipe data.
-* **Pertanyaan 2:** Modifikasi kode program di atas dengan melakukan inisialisasi elemen array sekaligus pada saat deklarasi array (tanpa new int[4] dan pengisian satu per satu).
-![Output Percobaan](<Output .png>)
-  * **Jawab:** Bisa ditulis langsung seperti int[] bil = {5, 13, -7, 17};.
-* **Pertanyaan 3:** Ubah statement penampilan pada langkah ke-4 menjadi seperti berikut: System.out.println("bil[" + i + "] = " + bil[i] + ", double = " + (bil[i] * 2)); Apa keluaran dari program? Jelaskan maksud dari statement tersebut.
-   * **Jawab:** Keluaran dan maksud bil[i] + ", double = " + (bil[i] * 2): Program mencetak nilai asli elemen array diikuti hasil kali dua dari elemen tersebut. Tanda kurung pada (bil[i] * 2) penting agar perkalian dihitung dulu sebagai angka sebelum digabung menjadi teks.
-* **Pertanyaan 4:** Jika kondisi pada statement for-loop di atas diubah menjadi i <= 4, apa keluaran dari program? Mengapa demikian?
-  * **Jawab:** Jika kondisi diubah menjadi i <= 4: Program akan mengalami runtime error (ArrayIndexOutOfBoundsException) saat i = 4 karena array berkapasitas 4 hanya memiliki indeks 0 sampai 3.
-* **Pertanyaan 5:** Apa perbedaan antara menampilkan array menggunakan for loop, foreach loop, dan Arrays.toString() pada langkah ke-5? Kapan sebaiknya masing-masing digunakan?
-  * **Jawab:** Perbedaan for, foreach, dan Arrays.toString():
-for loop: Mengakses elemen memakai indeks i. Cocok jika butuh nomor indeks atau ingin mengubah isi array.
-foreach loop: Membaca tiap nilai elemen secara langsung tanpa memakai indeks. Cocok untuk menampilkan isi array secara ringkas.
-Arrays.toString(): Mengubah seluruh isi array menjadi satu baris teks berformat [a, b, c]. Cocok untuk pengecekan atau debugging cepat.   .
-    
+* **Pertanyaan 1:** Apakah pengisian elemen array harus dilakukan secara berurutan mulai dari indeks ke-0? Jelaskan!
+  * **Jawab:** 
+* **Pertanyaan 2:** Mengapa terdapat null pada daftar nama penonton? Jelaskan dari sisi nilai default array.
+  * **Jawab:** .
+* **Pertanyaan 3:** Lengkapi pengisian pada langkah 3 jika ada elemen yang belum terisi, lalu jalankan kembali program.
+   * **Jawab:** .
+* **Pertanyaan 4:** Tambahkan kode berikut setelah langkah 4. Jelaskan fungsi dari penonton.length dan penonton[0].length!
+```java
+System.out.println(penonton.length);
+System.out.println(penonton[0].length);
+System.out.println(penonton[1].length);
+System.out.println(penonton[2].length);
+System.out.println(penonton[3].length);
+```
+  * **Jawab:** .
+* **Pertanyaan 5:** Apakah penonton[0].length, penonton[1].length, penonton[2].length, dan penonton[3].length memiliki nilai yang sama? Mengapa?
+  * **Jawab:** .
+* **Pertanyaan 6:** Modifikasi kode pada pertanyaan 4 untuk menampilkan panjang setiap baris menggunakan for loop. Compile, run, lalu amati hasilnya.
+```java
+System.out.println(penonton.length);
+
+for (int i = 0; i < penonton.length; i++) {
+     System.out.println("Panjang baris ke-" + (i + 1) + ": " +
+penonton[i].length);
+}
+```
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)
+* **Pertanyaan 7:** Modifikasi kode pada pertanyaan 5 untuk menampilkan panjang setiap baris menggunakan foreach loop. Compile, run, lalu amati hasilnya.
+```java
+System.out.println(penonton.length);
+
+for (String[] barisPenonton : penonton) {
+    System.out.println("Panjang baris: " + barisPenonton.length);
+}
+```
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)
+* **Pertanyaan 8:** Tambahkan kode untuk menampilkan nama penonton pada baris ke-3 (indeks 2) menggunakan for loop. Compile, run, lalu amati hasilnya.
+```java
+System.out.println("Penonton pada baris ke-3: ");
+
+for (int i = 0; i < penonton[2].length; i++) {
+    System.out.println(penonton[2][i]);
+}
+```
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)
+* **Pertanyaan 9:** Modifikasi kode pada pertanyaan 8 menjadi perulangan dengan foreach loop. Compile, run, lalu amati hasilnya.
+```java
+System.out.println("Penonton pada baris ke-3: ");
+
+for (String i : penonton[2]) {
+    System.out.println(i);
+}
+```
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)
+* **Pertanyaan 10:** Modifikasi kode pada pertanyaan 9 untuk menampilkan nama penonton setiap baris. Gunakan String.join(), compile, run, lalu amati hasilnya.
+```java
+for (int i = 0; i < penonton.length; i++) {
+    System.out.println("Penonton pada baris ke-" + (i + 1) + ": " +
+String.join(", ", penonton[i]));
+}
+```
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)
+* **Pertanyaan 11:** Menurut Anda, apa kekurangan dan kelebihan foreach loop dibandingkan for loop?
+  * **Jawab:** .
+* **Pertanyaan 12:** Berapa indeks baris maksimal untuk array penonton? Dari mana nilai itu diperoleh?
+  * **Jawab:** .
+* **Pertanyaan 13:** Berapa indeks kolom maksimal untuk array penonton? Apakah nilainya sama untuk setiap baris?
+  * **Jawab:** .
+* **Pertanyaan 14:** Apa fungsi dari String.join()? Jelaskan parameter yang diterimanya.
+  * **Jawab:** .
 ---
 
-### 2.2 Percobaan 2: Studi Kasus SIAKAD — Input Nilai Mahasiswa dan Status Kelulusan
+### 2.2 Percobaan 2:  Scanner dan Perulangan untuk Input dan Output Array 2
+Dimensi
 
 #### 2.2.1 Kode Program
 ```java
 import java.util.Scanner;
 
-public class ArrayNilai19 {
+public class BioskopWithScanner19 {
     public static void main(String[] args) {
-        int[] nilaiAkhir = new int[10];
-        Scanner input = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        int baris, kolom;
+        String nama, pilihan;
+        String[][] penonton = new String[4][2];
 
-        for (int i = 0; i < nilaiAkhir.length; i++) {
-            System.out.print("Masukkan nilai mahasiswa ke-" + (i + 1) + ": ");
-            nilaiAkhir[i] = input.nextInt();
+        while (true) {
+            System.out.print("Masukkan nama: ");
+            nama = sc.nextLine();
+            System.out.print("Masukkan baris: ");
+            baris = sc.nextInt();
+            System.out.print("Masukkan kolom: ");
+            kolom = sc.nextInt();
+            sc.nextLine();
+
+            penonton[baris - 1][kolom - 1] = nama;
+
+            System.out.print("Input penonton lainnya? (y/n): ");
+            pilihan = sc.nextLine();
+
+            if (pilihan.equalsIgnoreCase("n")) {
+                break;
+            }
         }
-
-        for (int i = 0; i < nilaiAkhir.length; i++) {
-            String status = (nilaiAkhir[i] > 70) ? "LULUS" : "TIDAK LULUS";
-            System.out.println("Mahasiswa ke-" + (i + 1) + ": " + nilaiAkhir[i] + " (" + status + ")");
-        }
-
+        sc.close();
     }
 }
 
@@ -94,60 +206,44 @@ public class ArrayNilai19 {
 
 #### 2.2.2 Hasil Running
 
-![Output Percobaan 2](<Output Array Nilai.png>)
+![Output Percobaan 2](<Output.png>)
 
 #### 2.2.3 Jawaban Pertanyaan / Pertanyaan Refleksi
-* **Pertanyaan 1:** Apa yang dimaksud dengan kondisi i < nilaiAkhir.length pada perulangan di atas?
-  * **Jawab:** Maksud i < nilaiAkhir.length: Perulangan berjalan selama indeks i masih lebih kecil dari panjang array nilaiAkhir (yaitu 0 sampai 9 untuk array berukuran 10). 
-* **Pertanyaan 2:** Modifikasi program agar hanya menampilkan nilai mahasiswa yang lulus saja (nilai > 70), tanpa menampilkan yang tidak lulus. Jelaskan alur programnya!
-  * **Jawab:** Hanya menampilkan yang lulus (nilai > 70): Di dalam perulangan tampil, gunakan kondisi if (nilaiAkhir[i] > 70) agar baris cetak hanya dijalankan jika nilai lebih dari 70. Mahasiswa dengan nilai <=70 dilewati begitu saja. 
-* **Pertanyaan 3:** Ubah perulangan pada langkah ke-4 dan ke-5 dari for loop menjadi foreach loop. Apakah seluruh bagian program dapat diubah menjadi foreach? Jelaskan bagian mana yang bisa dan tidak bisa, beserta alasannya.
-  * **Jawab:** Mengubah for menjadi foreach:Bagian tampil (langkah 5) bisa: Karena hanya membaca nilai tiap elemen tanpa butuh indeks.
-Bagian input (langkah 4) kurang tepat/tidak praktis: foreach tidak menyediakan indeks posisi elemen dan tidak ideal untuk mengisi/mengubah elemen array berdasarkan urutan input.   
-* **Pertanyaan 4:**  Modifikasi program agar turut menghitung dan menampilkan jumlah mahasiswa yang lulus dan jumlah mahasiswa yang tidak lulus di akhir program.
-  * **Jawab:** 
-
-![Output Modif Percobaan](<Output.png>)
+* **Pertanyaan 1:** Apakah pengisian elemen array dari Scanner harus dilakukan secara berurutan mulai dari indeks ke-0? Jelaskan!
+  * **Jawab:** .
+* **Pertanyaan 2:** Modifikasi program agar menampilkan menu berikut:
+MENU & FUNGSI : 1 (Input data penonton), 2 (Tampilkan daftar penonton), 3 (Exit).
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)
+* **Pertanyaan 3:** Modifikasi program untuk menangani nomor baris atau kolom yang tidak tersedia (misalnya baris 7 atau kolom 0).
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>)  
+* **Pertanyaan 4:**  Pada menu 1, tampilkan peringatan jika kursi yang dipilih sudah terisi penonton lain, lalu minta baris dan kolom kembali.
+Petunjuk: Kursi terisi dapat dicek dengan penonton[baris - 1][kolom - 1] != null.
+Pengecekan rentang juga perlu dilakukan terhadap penonton.length untuk baris, dan
+penonton[baris - 1].length untuk kolom.
+  * **Jawab:** .
+* **Pertanyaan 5:** Pada menu 2, jika sebuah kursi kosong (null), tampilkan *** sebagai pengganti null.
+  * **Jawab:** .
+![Output Modifikasi](<Output.png>) 
 
 ---
 
-### 2.3 Percobaan 3: Operasi Aritmatika pada Array — Total, Rata-rata, Nilai Tertinggi dan Terendah
+### 2.3 Percobaan 3: Array 2 Dimensi dengan Panjang Baris Berbeda
 
 #### 2.3.1 Kode Program Java
  ```java
-import java.util.Scanner;
+import java.util.Arrays;
 
-public class ArrayRataNilai19 {
+public class Numbers19 {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        int[] nilaiMhs = new int[10];
-        int total = 0;
-        double rata2;
+        int[][] myNumbers = new int[3][];
+        myNumbers[0] = new int[5];
+        myNumbers[1] = new int[3];
+        myNumbers[2] = new int[1];
 
-        for (int i = 0; i < nilaiMhs.length; i++) {
-            System.out.print("Masukkan nilai mahasiswa ke-" + (i + 1) + ": ");
-            nilaiMhs[i] = input.nextInt();
-            total += nilaiMhs[i];
-        }
-        rata2 = (double) total / nilaiMhs.length;
-        System.out.println("Total nilai: " + total);
-        System.out.println("Rata-rata: " + rata2);
-
-        int tertinggi = nilaiMhs[0];
-        int terendah = nilaiMhs[0];
-        for (int i = 1; i < nilaiMhs.length; i++) {
-            if (nilaiMhs[i] > tertinggi) tertinggi = nilaiMhs[i];
-            if (nilaiMhs[i] < terendah) terendah = nilaiMhs[i];
-        }
-        System.out.println("Nilai tertinggi: " + tertinggi);
-        System.out.println("Nilai terendah: " + terendah);
-
-        if (rata2 >= 85) {
-            System.out.println("Predikat kelas: SANGAT BAIK");
-        } else if (rata2 >=70) {
-            System.out.println("Predikat kelas: BAIK");
-        } else {
-            System.out.println("Predikat kelas: PERLU PENDAMPINGAN");
+        for (int i = 0; i < myNumbers.length; i++) {
+            System.out.println(Arrays.toString(myNumbers[i]));
         }
     }
 }
@@ -155,137 +251,99 @@ public class ArrayRataNilai19 {
 ```
 #### 2.3.2 Hasil Running
 
-![Output Percobaan 3](<Output Rata Nilai.png>)
+![Output Percobaan 3](<Output .png>)
 
 #### 2.3.3 Jawaban Pertanyaan / Pertanyaan Refleksi
-* **Pertanyaan 1:** Modifikasi kode program di atas agar dapat menampilkan banyaknya mahasiswa yang lulus, yaitu mahasiswa yang memiliki nilai lebih besar dari 70 (> 70)..
+* **Pertanyaan 1:** Apa fungsi dari Arrays.toString()?
   * **Jawab:**
-![Output Modif Percobaan](<Output.png>)
-
-* **Pertanyaan 2:** Modifikasi program di atas sehingga program menerima jumlah elemen array berdasarkan input dari pengguna (tidak selalu 10), lalu tetap dapat menghitung total, rata-rata, nilai tertinggi, dan nilai terendah dengan benar.
+* **Pertanyaan 2:** Pada Kode 16, Arrays.toString() dipanggil pada myNumbers[i]. Ganti pemanggilannya menjadi Arrays.toString(myNumbers), lalu compile dan jalankan. Apa yang tampil? Jelaskan.
   * **Jawab:**
-![Output Modif Percobaan](<Output.png>)
-
-* **Pertanyaan 3:** Mengapa pada perhitungan rata-rata digunakan (double) total / nilaiMhs.length, bukan langsung total / nilaiMhs.length? Jelaskan!.
-  * **Jawab:** Karena total dan nilaiMhs.length bertipe int. Pembagian sesama int akan membuang angka di belakang koma (pembagian bulat), sedangkan (double) mengubahnya menjadi pecahan desimal agar hasil rata-rata akurat.
-
-### 2.4 Percobaan 4: Pencarian (Searching) dan Pengurutan (Sorting) Sederhana
-
-#### 2.4.1 Kode Program Java: Bagian A - Linear Search
+* **Pertanyaan 3:** Jalankan juga System.out.println(Arrays.deepToString(myNumbers));. Bandingkan
+hasilnya dengan Kode 16. Mengapa deepToString() diperlukan untuk array 2 dimensi?
+  * **Jawab:**
+* **Pertanyaan 4:** Apa nilai default untuk elemen array dengan tipe data int?
+  * **Jawab:** .
+* **Pertanyaan 5:** Tambahkan kode berikut untuk menampilkan panjang setiap baris. Compile dan run, lalu amati hasilnya.
 ```java
-public class SearchNilai19 {
+for (int i = 0; i < myNumbers.length; i++) {
+    System.out.println("Panjang baris ke-" + (i + 1) + ": " +
+myNumbers[i].length);
+}
+```
+  * **Jawab:**
+![Output Modifikasi](<Output.png>) 
+* **Pertanyaan 6:** Array myNumbers memiliki panjang yang berbeda untuk setiap barisnya. Apakah panjang array dapat dimodifikasi setelah diinstansiasi? Jelaskan.
+  * **Jawab:**
+* **Pertanyaan 7:** Jalankan myNumbers[0] = new int[7]; setelah instansiasi, lalu cetak myNumbers.length dan myNumbers[0].length. Bagian mana yang berubah? Mengapa?
+  * **Jawab:**
+
+### 2.4 Percobaan 4: Studi Kasus SIAKAD
+
+#### 2.4.1 Kode Program Java
+```java
+import java.util.Scanner;
+
+public class SIAKAD19 {
     public static void main(String[] args) {
-        int[] nilai = {78, 65, 90, 55, 88, 72};
-        int key = 90;
-        boolean ditemukan = false;
+        Scanner sc = new Scanner(System.in);
+        int[][] nilai = new int[4][3];
 
         for (int i = 0; i < nilai.length; i++) {
-            if (nilai[i] == key) {
-                System.out.println("Nilai " + key + " ditemukan pada indeks ke-" + i);
-                ditemukan = true;
-                break;
+            System.out.println("Input nilai mahasiswa ke-" + (i + 1));
+            double totalPerSiswa = 0;
+
+            for (int j = 0; j < nilai[i].length; j++) {
+                System.out.print("Nilai mata kuliah " + (j + 1) + ": ");
+                nilai[i][j] = sc.nextInt();
+                totalPerSiswa += nilai[i][j];
             }
-        }
-        if (!ditemukan) {
-            System.out.println("Nilai " + key + " tidak ditemukan.");
-        }
-    }
-}
 
-```
-#### Kode Program: Bagian B - Bubble Sort
-```java
-import java.util.Arrays;
+            System.out.println("Nilai rata-rata: " + totalPerSiswa / nilai[i].length);
 
-public class SortNilai19 {
-    public static void main(String[] args) {
-        int[] nilai = {78, 65, 90, 55, 88, 72};
-        for (int i = 0; i < nilai.length - 1; i++) {
-            for (int j = 0; j < nilai.length - 1 - i; j++) {
-                if (nilai[j] > nilai[j + 1]) {
-                    int temp = nilai[j];
-                    nilai[j] = nilai[j + 1];
-                    nilai[j + 1] = temp;
+            System.out.println("\n=======================================");
+            System.out.println("Rata-rata nilai setiap mata kuliah:");
+
+            for (int j = 0; j < nilai[0].length; j++) {
+                double totalPerMatkul = 0;
+
+                for (i = 0; i < nilai.length; i++) {
+                    totalPerMatkul += nilai[i][j];
                 }
+                System.out.println("Mata kuliah " + (j + i) + ": " + totalPerMatkul / nilai.length);
             }
         }
-        System.out.println(Arrays.toString(nilai));
     }
 }
+
 
 ```
 
 #### 2.4.2 Hasil Running: Bagian A 
 
-![Output Percobaan 4](<Output A.png>)
-
-#### Hasil Running: Bagian B
-
-![Output Percobaan 4](<Output B.png>)
+![Output Percobaan 4](<Output .png>)
 
 #### 2.4.3 Jawaban Pertanyaan / Pertanyaan Refleksi
-* **Pertanyaan 1:** Jelaskan maksud dari statement break; pada kode program Bagian A di atas!
-  * **Jawab:** Maksud break; pada Linear Search: Menghentikan perulangan lebih awal begitu nilai key yang dicari sudah ditemukan, sehingga tidak perlu memeriksa sisa elemen berikutnya.
-* **Pertanyaan 2:** Modifikasi kode program Bagian A sehingga program dapat menerima input berupa banyaknya elemen array nilai, isi array, dan sebuah nilai (key) yang ingin dicari dari pengguna, lalu mencetak indeks posisi elemen dari nilai (key) tersebut.
-  * **Jawab:** Input ukuran array, isi array, dan key dari pengguna: Baca jumlah elemen untuk membuat array, isi tiap elemen lewat loop, baca key, lalu cari menggunakan loop dan cetak indeksnya jika cocok.
-* **Pertanyaan 3:** Modifikasi program Bagian A agar menampilkan pesan "Nilai yang dicari tidak ditemukan" dengan format pesan yang lebih informatif apabila nilai yang dicari (key) tidak ada di dalam array.
-  * **Jawab:** Pesan jika key tidak ditemukan: Jika setelah loop selesai status penemuan masih false, tampilkan pesan jelas seperti "Nilai " + key + " tidak ditemukan di dalam data array.".
-![Output Modif Percobaan](<Output.png>)
-
-* **Pertanyaan 4:** Jelaskan langkah demi langkah cara kerja algoritma bubble sort pada Bagian B menggunakan data ujicoba yang tersedia!
-  * **Jawab:** Cara kerja Bubble Sort pada {78, 65, 90, 55, 88, 72}: Algoritma membandingkan dua elemen bersebelahan (nilai[j] dan nilai[j + 1]). Jika elemen kiri lebih besar dari kanan, posisinya ditukar memakai variabel temp. Proses ini diulang beberapa putaran hingga angka terbesar "menggelembung" ke kanan dan seluruh array terurut naik.
-* **Pertanyaan 5:** Modifikasi program Bagian B agar mengurutkan array dari nilai terbesar ke terkecil (descending),
-bukan dari terkecil ke terbesar.
-  * **Jawab:** 
-![Output Modif Percobaan](<Output.png>)
+* **Pertanyaan 1:** Bagaimana jika jumlah mahasiswa dan jumlah mata kuliah berubah? Modifikasi program SIAKAD agar jumlah mahasiswa dan mata kuliah dapat ditentukan saat program berjalan.
+Petunjuk: gunakan Scanner untuk membaca dua nilai tersebut, lalu buat array dengan new int[jumlahMahasiswa][jumlahMataKuliah]. Pastikan semua perulangan memakai length, bukan angka tetap.
+Pertanyaan Diskusi: Pada Kode 20, variabel totalPerSiswa dideklarasikan di dalam loop luar. Apa yang terjadi jika deklarasinya dipindah ke luar loop? Jelaskan dengan contoh nilai. Jika ada nilai yang belum diisi (bernilai 0 secara default), bagaimana pengaruhnya terhadap ratarata? Diskusikan apakah program perlu membedakan "belum diisi" dari "nilainya 0".
+  * **Jawab:** .
 
 
 ## 3: TUGAS MANDIRI
-   1. Tugas 1 - Pengelolaan Nilai Mahasiswa: Buatlah program yang dapat menyimpan dan mengelola nilai mahasiswa (bilangan bulat). Program harus
-menyediakan fitur untuk:
-• Memasukkan banyaknya nilai mahasiswa yang akan diinput.
-• Memasukkan setiap nilai mahasiswa satu per satu.
-• Menghitung nilai rata-rata dari seluruh nilai yang dimasukkan.
-• Menampilkan nilai tertinggi dan nilai terendah.
-• Menampilkan semua nilai yang telah dimasukkan, beserta status kelulusannya (LULUS / TIDAK LULUS).
-   * **Kode Program java**
-```java
+Implementasikan flowchart latihan survei pada slide Dasar Pemrograman (Teori) ke dalam program Java. Data survei terdiri dari 10 responden dan 6 pertanyaan dengan jawaban 1 sampai 5. Program harus:
+• menyimpan hasil survei ke dalam array 2 dimensi;
+• menampilkan nilai rata-rata untuk setiap responden;
+• menampilkan nilai rata-rata untuk setiap pertanyaan;
+• menampilkan nilai rata-rata secara keseluruhan.
 
+� Catatan Konsep: jumlah responden dan pertanyaan sebaiknya disimpan dalam konstanta, misalnya final int JUMLAH_RESPONDEN = 10;. Dengan begitu, setiap perulangan dapat memakai batas yang sama dan mudah diubah.
 
-```
-   * **Hasil Running**
-
-![Output Tugas 1](<Output Tugas 1.png>)
-
-   2. Tugas 2 - Aplikasi Pemesanan Kafe Kampus: Buat program yang dapat mengelola pemesanan makanan dan minuman di kafe kampus. Program
-menyediakan daftar menu yang sudah ditentukan, memungkinkan pengguna memilih menu melalui fitur pencarian, mencatat pesanan, serta menghitung total biaya.
-
-Daftar menu kafe (inisialisasi array of String saat deklarasi):
-```java
-String[] menu = {"Nasi Goreng", "Mie Goreng", "Roti Bakar", "Kentang Goreng", "Teh Tarik", "Cappucino", "Chocolate Ice"};
-int[] harga = {15000, 13000, 10000, 12000, 8000, 18000, 20000};
-```
-Program yang dibuat wajib mencakup ketentuan berikut:
-• Fitur pencarian menu: pengguna memasukkan nama makanan/minuman yang ingin dipesan, program
-mencari nama tersebut di dalam array menu menggunakan algoritma linear search. Apabila
-ditemukan, tampilkan harganya; apabila tidak ditemukan, beri tahu pengguna bahwa menu tersebut
-tidak tersedia.
-• Fitur pemesanan: pengguna memasukkan jumlah item yang ingin dipesan, lalu untuk setiap item
-memilih nama menu (yang harus tervalidasi ada dalam daftar menu). Simpan nama pesanan dalam
-array satu dimensi terpisah dari array menu utama.
-• Hitung dan tampilkan total biaya dari seluruh pesanan yang dimasukkan pengguna.
-• Tampilkan daftar pesanan yang telah dibuat beserta total biayanya, dengan format tampilan yang rapi
-dan mudah dibaca.
-
-   * **Kode Program Java**
-```java
-
-
-```
-
-
-   * **Hasil Running**
-
-![Output Tugas 2](<Output Tugas 2.png>)
+### Refleksi.
+* **1.**  Sebutkan dua situasi nyata yang cocok dimodelkan dengan array 2 dimensi, dan jelaskan apa yang menjadi baris serta kolomnya.
+  * **Jawab** .
+* **2.**  Apa perbedaan utama antara array 2 dimensi yang persegi dan jagged array? Berikan satu contoh penggunaan untuk masing-masing.
+  * **Jawab** .
+* **3.**  Di bagian mana pada jobsheet ini Anda paling sering melakukan kesalahan indeks? Bagaimana cara mencegahnya?
+  * **Jawab** .
 
   
